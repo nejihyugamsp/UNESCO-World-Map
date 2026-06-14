@@ -30,12 +30,12 @@ function closePopup() {
 // -----------------------------
 function createPopup(coords, p) {
 
+    closePopup();
+
     const icon =
         p.category === 'Natural' ? '🌳' :
         p.category === 'Mixed' ? '⭐' :
         '🏛';
-
-    closePopup();
 
     activePopup = new maplibregl.Popup()
         .setLngLat(coords)
@@ -53,13 +53,13 @@ function createPopup(coords, p) {
 // -----------------------------
 map.on('load', () => {
 
-    fetch('data/unesco.geojson')
-        .then(r => r.json())
+    // ✅ FIX IS HERE (NO /data FOLDER)
+    fetch('unesco.geojson')
+        .then(res => res.json())
         .then(data => {
 
             originalData = data;
 
-            // ✔ BACK TO GEOJSON (IMPORTANT FIX)
             map.addSource('unesco', {
                 type: 'geojson',
                 data: data
@@ -72,6 +72,7 @@ map.on('load', () => {
                 paint: {
 
                     'circle-radius': 5,
+
                     'circle-color': [
                         'match',
                         ['get', 'category'],
@@ -79,6 +80,7 @@ map.on('load', () => {
                         'Mixed', '#DAA520',
                         '#1E90FF'
                     ],
+
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff'
                 }
@@ -88,7 +90,6 @@ map.on('load', () => {
             setupSearch();
             updateStats(data.features);
 
-            // CLICK WORKS ON LAYER (fast + all sites)
             map.on('click', 'unesco-sites', (e) => {
                 const f = e.features[0];
                 createPopup(f.geometry.coordinates, f.properties);
