@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>UNESCO World Heritage Explorer</title>
+
+    <link href="https://unpkg.com/maplibre-gl@5.3.0/dist/maplibre-gl.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+        }
+
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+
+        #map {
+            width: 75%;
+            height: 100%;
+        }
+
+        #sidebar {
+            width: 25%;
+            padding: 16px;
+            background: #ffffff;
+            border-left: 1px solid #e5e7eb;
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+
+        .label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #6b7280;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            outline: none;
+            font-size: 13px;
+        }
+
+        input:focus, select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+        }
+
+        #statsBox {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .legend-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="container">
+
+    <div id="map"></div>
+
+    <div id="sidebar">
+
+        <h2>🌍 UNESCO Explorer</h2>
+
+        <div class="card">
+            <span class="label">Search</span>
+            <input id="searchBox" placeholder="Search UNESCO site...">
+        </div>
+
+        <div class="card">
+            <span class="label">Country</span>
+            <select id="countryFilter">
+                <option value="all">All Countries</option>
+            </select>
+
+            <br><br>
+
+            <span class="label">Category</span>
+            <select id="categoryFilter">
+                <option value="all">All</option>
+                <option value="Cultural">Cultural</option>
+                <option value="Natural">Natural</option>
+                <option value="Mixed">Mixed</option>
+            </select>
+        </div>
+
+        <div class="card">
+            <div id="statsBox"></div>
+        </div>
+
+        <!-- LEGEND (GRAMMAR FIXED ONLY) -->
+        <div class="card">
+
+            <b>Legend</b><br><br>
+
+            <div class="legend-row">
+                <div class="dot" style="background:#1E90FF;"></div>
+                Cultural: Human-made heritage, such as temples and monuments
+            </div>
+
+            <div class="legend-row">
+                <div class="dot" style="background:#2E8B57;"></div>
+                Natural: Natural landscapes, such as forests and mountains
+            </div>
+
+            <div class="legend-row">
+                <div class="dot" style="background:#DAA520;"></div>
+                Mixed: Sites with both cultural and natural significance
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@5.3.0/dist/maplibre-gl.js"></script>
+<script src="script.js"></script>
+
+</body>
+
+</html>
