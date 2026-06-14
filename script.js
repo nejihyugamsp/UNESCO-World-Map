@@ -53,7 +53,7 @@ function createPopup(coords, p) {
 // -----------------------------
 map.on('load', () => {
 
-    // ✅ FIX IS HERE (NO /data FOLDER)
+    // ✅ UPDATED PATH (NO data/ folder anymore)
     fetch('unesco.geojson')
         .then(res => res.json())
         .then(data => {
